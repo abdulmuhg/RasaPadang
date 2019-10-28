@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Input Produk"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/editKodeProduk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="14sp"
+        android:paddingTop="14dp"
+        android:textSize="14sp"
+        android:maxLength="7"
+        android:inputType="number"
+        android:hint="Kode Produk"
+        android:layout_marginTop="8dp"/>
+    <EditText
+        android:id="@+id/editNamaProduk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="14sp"
+        android:paddingTop="14dp"
+        android:textSize="14sp"
+        android:inputType="text"
+        android:singleLine="true"
+        android:hint="Nama Produk"
+        android:layout_marginTop="8dp"/>
+    <EditText
+        android:id="@+id/editHargaPokok"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="14sp"
+        android:paddingTop="14dp"
+        android:textSize="14sp"
+        android:maxLength="7"
+        android:hint="Harga Pokok"
+        android:layout_marginTop="8dp"
+        android:singleLine="true"
+        android:inputType="number"/>
+    <EditText
+        android:id="@+id/editHargaJual"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="14sp"
+        android:paddingTop="14dp"
+        android:textSize="14sp"
+        android:maxLength="7"
+        android:hint="Harga Jual"
+        android:layout_marginTop="8dp"
+        android:singleLine="true"
+        android:inputType="number"/>
+    <EditText
+        android:id="@+id/editStokProduk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="14sp"
+        android:paddingTop="14dp"
+        android:textSize="14sp"
+        android:maxLength="6"
+        android:hint="Stok Produk"
+        android:layout_marginTop="8dp"
+        android:singleLine="true"
+        android:inputType="number"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+        <Button
+            android:id="@+id/btnBersihkan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Kosongkan"
+            android:textAllCaps="false"
+            android:layout_weight="1"
+            android:padding="16dp"/>
+        <Button
+            android:id="@+id/btnSimpan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Simpan"
+            android:textAllCaps="false"
+            android:layout_weight="1"
+            android:padding="16dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnLihatData"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="16dp"
+            android:text="Lihat Data"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btnTransaksi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="16dp"
+            android:text="Transaksi"
+            android:textAllCaps="false" />
+    </LinearLayout>
+
+</LinearLayout>
