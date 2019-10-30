@@ -71,6 +71,7 @@ public class AddProdukActivity extends AppCompatActivity {
                 editStok.getText().toString().isEmpty()){
             //Beritahukan jika ada form yang kosong dengan TOASTER
             Toast.makeText(AddProdukActivity.this,"Data masih belum lengkap.",Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(AddProdukActivity.this, MainActivity.class));
         }else{
             //periksa apakah sudah ada data dengan kode yang sama
             String queryCek = "SELECT * FROM produk WHERE kode_produk = "+editKodeProduk.getText();

@@ -1,5 +1,6 @@
 package personalproject.abdulmughniaf.rasapadang;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -12,11 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.ViewHolder> {
+public class AdapterProdukUser extends RecyclerView.Adapter<AdapterProdukUser.ViewHolder> {
     private ArrayList<ModelProduk> produk;
     private Context context;
 
-    public AdapterProduk(Context context, ArrayList<ModelProduk> produks) {
+    public AdapterProdukUser(Context context, ArrayList<ModelProduk> produks) {
         this.produk = produks;
         this.context = context;
     }
@@ -26,12 +27,12 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.ViewHolder
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //mengatur content_list_produk_editor.xmltor.xml sebagai template
         // item dari list produk yang akan ditampilkan
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.content_list_produk_editor, null);
-        return new AdapterProduk.ViewHolder(v);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.content_list_produk_user, null);
+        return new AdapterProdukUser.ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //untuk menampilkan data produk pada content_list_produk_editor_editor.xml
         holder.namaProduk.setText(produk.get(position).getNama_produk());
         holder.stokProduk.setText(produk.get(position).getStok()+" Items");
@@ -44,12 +45,7 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.ViewHolder
                 //membuka halaman/Activity Activity_DetailProduk
                 //dan mengirim sebuah nilai dengan kata kunci "kode_produk,dkk"
                 //dimana isinya merupakai kode_produk
-                Intent intent = new Intent(context,DetailProdukActivity.class);
-                intent.putExtra("kode_produk",produk.get(position).getKode_produk());
-                intent.putExtra("nama_produk",produk.get(position).getNama_produk());
-                intent.putExtra("harga_pokok",produk.get(position).getHarga_pokok());
-                intent.putExtra("harga_jual",produk.get(position).getHarga_jual());
-                intent.putExtra("stok",produk.get(position).getStok());
+                Intent intent = new Intent(context,LoginActivity.class);
                 context.startActivity(intent);
             }
         });

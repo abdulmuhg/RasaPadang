@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             //cursor.moveToNext();
         }
         //mempersiapkan adapter untuk recyclerView
-        AdapterProduk adapterProduk = new AdapterProduk(this,produk);
+        AdapterProdukUser adapterProduk = new AdapterProdukUser(this,produk);
         //mengatur adapter untuk RecyclerView
         listProduk.setAdapter(adapterProduk);
         listProduk.getAdapter().notifyDataSetChanged();
