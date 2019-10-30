@@ -2,13 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="Input Produk"
-        android:textColor="@android:color/black"
-        android:textSize="16sp" />
+        android:text="Input Menu"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        />
 
     <EditText
         android:id="@+id/editKodeProduk"

@@ -1,6 +1,9 @@
 package personalproject.abdulmughniaf.rasapadang;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
 
@@ -9,40 +12,58 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private DBHelper db;
-
+    public String msg;
     private RecyclerView listProduk;
     private ArrayList<ModelProduk> produk;
+    public ArrayList<String> pesanan = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         db = new DBHelper(this);
 
         inisialisasi();
         load_fungsi();
         load_data();
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
+                new IntentFilter("custom-message"));
+        pesanan.add("dummy");
+        FloatingActionButton fab = findViewById(R.id.fabEdit);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, AddProdukActivity.class));
+                Intent intent = new Intent(MainActivity.this, TransaksiActivity.class);
+                intent.putExtra("nama_produk",pesanan);
+                startActivity(intent);
             }
         });
     }
+    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Get extra data included in the Intent
+            String nama_produk = intent.getStringExtra("nama_produk");
+            Toast.makeText(MainActivity.this,nama_produk ,Toast.LENGTH_SHORT).show();
+            msg = nama_produk;
+            pesanan.add(msg);
+        }
+    };
 
     private void inisialisasi() {
         listProduk = findViewById(R.id.listProduk);
@@ -97,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            startActivity(new Intent(MainActivity.this, ListProdukActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

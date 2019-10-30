@@ -3,12 +3,15 @@ package personalproject.abdulmughniaf.rasapadang;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.TrafficStats;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -32,11 +35,11 @@ public class AdapterProdukUser extends RecyclerView.Adapter<AdapterProdukUser.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //untuk menampilkan data produk pada content_list_produk_editor_editor.xml
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         holder.namaProduk.setText(produk.get(position).getNama_produk());
-        holder.stokProduk.setText(produk.get(position).getStok()+" Items");
         holder.hargaJual.setText("Rp "+produk.get(position).getHarga_jual());
+        holder.jmlhItem.setText("0");
+
 
         //fungsi saat mengklik item list
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +52,34 @@ public class AdapterProdukUser extends RecyclerView.Adapter<AdapterProdukUser.Vi
                 context.startActivity(intent);
             }
         });
+        holder.addItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String item = holder.jmlhItem.getText().toString();
+                int items = Integer.parseInt(item);
+                items = items+1;
+
+                holder.jmlhItem.setText(items+"");
+                Intent intent = new Intent("custom-message");
+                intent.putExtra("nama_produk",produk.get(position).getNama_produk());
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
+            }
+        });
+        holder.removeItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String item = holder.jmlhItem.getText().toString();
+                int items = Integer.parseInt(item);
+                items = items-1;
+
+                if(items < 0){
+                    holder.jmlhItem.setText(item+"");
+                }else{
+                    holder.jmlhItem.setText(items+"");
+                }
+            }
+        });
     }
 
     @Override
@@ -57,13 +88,15 @@ public class AdapterProdukUser extends RecyclerView.Adapter<AdapterProdukUser.Vi
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        //mendeklarasikan komponen pada layout content_list_produk_editor_editor.xml
-        TextView namaProduk,stokProduk,hargaJual;
+        TextView namaProduk,hargaJual,jmlhItem;
+        ImageButton addItem, removeItem;
         ViewHolder(View itemView){
             super(itemView);
-            namaProduk = itemView.findViewById(R.id.txtNamaProduk);
-            stokProduk = itemView.findViewById(R.id.txtStokProduk);
-            hargaJual = itemView.findViewById(R.id.txtHargaJual);
+            namaProduk = itemView.findViewById(R.id.tvUser_NamaProduk);
+            hargaJual = itemView.findViewById(R.id.tvUser_HargaJual);
+            addItem = itemView.findViewById(R.id.btnAdd);
+            removeItem = itemView.findViewById(R.id.btnRemove);
+            jmlhItem = itemView.findViewById(R.id.tvJmlItem);
         }
     }
 }

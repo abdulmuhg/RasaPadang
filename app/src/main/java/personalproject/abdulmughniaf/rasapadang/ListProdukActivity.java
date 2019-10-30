@@ -1,12 +1,16 @@
 package personalproject.abdulmughniaf.rasapadang;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.ColorSpace;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -26,6 +30,14 @@ public class ListProdukActivity extends AppCompatActivity {
         inisialisasi();
         load_fungsi();
         load_data();
+
+        FloatingActionButton fab = findViewById(R.id.fabAdd);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ListProdukActivity.this, AddProdukActivity.class));
+            }
+        });
     }
 
     private void load_data() {

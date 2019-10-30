@@ -59,6 +59,7 @@ public class AddProdukActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //menjalankan method prosesSimpan()
                 prosesSimpan();
+                startActivity(new Intent(AddProdukActivity.this, ListProdukActivity.class));
             }
         });
     }

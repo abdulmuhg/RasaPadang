@@ -7,28 +7,20 @@
     android:layout_height="match_parent"
     tools:context=".DetailProdukActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_height="56dp"
-            android:layout_width="match_parent"
-            app:navigationIcon="?attr/homeAsUpIndicator"
-            app:titleTextColor="@android:color/white"
-            app:subtitleTextColor="@android:color/white"
-            app:title="Detail Produk"/>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="56dp"
         android:orientation="vertical"
         android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Edit Detail"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:textAlignment="center"
+            />
 
         <EditText
             android:id="@+id/detailKodeProduk"
