@@ -1,22 +1,33 @@
 package personalproject.abdulmughniaf.rasapadang;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class TransaksiActivity extends AppCompatActivity {
-    TextView tvTest;
+    private RecyclerView listTrans;
+    public ArrayList<ModelTransaksi> transaksiModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaksi);
+        transaksiModel = new ArrayList<>();
+        transaksiModel.clear();
+        transaksiModel = (ArrayList<ModelTransaksi>) getIntent().getSerializableExtra("transaksiModels");
+        listTrans = findViewById(R.id.listTransaksi);
 
-        ArrayList<String> nama_produk = (ArrayList<String>) getIntent().getSerializableExtra("nama_produk");
-        tvTest = findViewById(R.id.tvTestingIntent);
-        tvTest.setText(nama_produk+"");
+        listTrans.setLayoutManager(new LinearLayoutManager(this));
+
+        AdapterTransaksi adapterTransaksi = new AdapterTransaksi(this, transaksiModel);
+        listTrans.setAdapter(adapterTransaksi);
+        listTrans.getAdapter().notifyDataSetChanged();
+
     }
 }

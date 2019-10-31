@@ -62,6 +62,8 @@ public class AdapterProdukUser extends RecyclerView.Adapter<AdapterProdukUser.Vi
                 holder.jmlhItem.setText(items+"");
                 Intent intent = new Intent("custom-message");
                 intent.putExtra("nama_produk",produk.get(position).getNama_produk());
+                //intent.putExtra("harga_produk",produk.get(position).getHarga_jual());
+                //intent.putExtra("jumlah_item", items);
                 LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
             }

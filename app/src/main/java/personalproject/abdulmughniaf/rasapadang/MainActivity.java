@@ -26,8 +26,10 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private DBHelper db;
     public String msg;
+    public Bundle bundle;
     private RecyclerView listProduk;
     private ArrayList<ModelProduk> produk;
+    public ArrayList<ModelTransaksi> transaksi = new ArrayList<>();
     public ArrayList<String> pesanan = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +45,13 @@ public class MainActivity extends AppCompatActivity {
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
                 new IntentFilter("custom-message"));
-        pesanan.add("dummy");
+
         FloatingActionButton fab = findViewById(R.id.fabEdit);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, TransaksiActivity.class);
-                intent.putExtra("nama_produk",pesanan);
+                intent.putExtra("transaksiModels", transaksi);
                 startActivity(intent);
             }
         });
@@ -59,9 +61,17 @@ public class MainActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             // Get extra data included in the Intent
             String nama_produk = intent.getStringExtra("nama_produk");
-            Toast.makeText(MainActivity.this,nama_produk ,Toast.LENGTH_SHORT).show();
-            msg = nama_produk;
-            pesanan.add(msg);
+           // Double harga_produk = intent.getDoubleExtra("harga_produk", 0);
+           // int jumlah_item = intent.getIntExtra("jumlah_item", 0);
+
+            String dumyy = "dummy";
+            Toast.makeText(MainActivity.this, nama_produk ,Toast.LENGTH_SHORT).show();
+            ModelTransaksi modelTrans = new ModelTransaksi();
+
+            modelTrans.setNamaProduk(nama_produk);
+            //modelTrans.setHargaProduk(harga_produk);
+            //modelTrans.setJumlah(jumlah_item);
+            transaksi.add(modelTrans);
         }
     };
 

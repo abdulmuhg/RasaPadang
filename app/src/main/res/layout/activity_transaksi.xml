@@ -8,13 +8,10 @@
     tools:context=".TransaksiActivity"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvTestingIntent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listTransaksi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        />
+        android:overScrollMode="never" />
 
 </LinearLayout>
