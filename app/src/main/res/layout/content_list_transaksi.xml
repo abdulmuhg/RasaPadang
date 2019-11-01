@@ -26,20 +26,20 @@
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/txtStokProduk"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="0 Items"-->
-<!--                android:textSize="12sp" />-->
+            <TextView
+                android:id="@+id/tvTransJmlItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0 Items"
+                android:textSize="12sp" />
         </LinearLayout>
 
-<!--        <TextView-->
-<!--            android:id="@+id/txtHargaJual"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Rp 0"-->
-<!--            android:textColor="@android:color/black"-->
-<!--            android:textSize="16sp" />-->
+        <TextView
+            android:id="@+id/tvTransHargaJual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rp 0"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
     </LinearLayout>
 </RelativeLayout>

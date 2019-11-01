@@ -54,21 +54,23 @@ public class ListProdukActivity extends AppCompatActivity {
         Cursor cursor = db.customQuery(query);
         //mengarahkan cursor pada baris pertama hasil query
         cursor.moveToFirst();
-        while (cursor.moveToNext()){
-            ModelProduk model = new ModelProduk();
-            model.setKode_produk(cursor.getInt(cursor.getColumnIndex("kode_produk")));
-            model.setNama_produk(cursor.getString(cursor.getColumnIndex("nama_produk")));
-            model.setHarga_pokok(cursor.getDouble(cursor.getColumnIndex("harga_pokok")));
-            model.setHarga_jual(cursor.getDouble(cursor.getColumnIndex("harga_jual")));
-            model.setStok(cursor.getInt(cursor.getColumnIndex("stok")));
-            produk.add(model);
-            //cursor.moveToNext();
+        if (cursor != null && cursor.moveToFirst()) {
+            do{
+                ModelProduk model = new ModelProduk();
+                model.setKode_produk(cursor.getInt(cursor.getColumnIndex("kode_produk")));
+                model.setNama_produk(cursor.getString(cursor.getColumnIndex("nama_produk")));
+                model.setHarga_pokok(cursor.getDouble(cursor.getColumnIndex("harga_pokok")));
+                model.setHarga_jual(cursor.getDouble(cursor.getColumnIndex("harga_jual")));
+                model.setStok(cursor.getInt(cursor.getColumnIndex("stok")));
+                produk.add(model);
+                //cursor.moveToNext();
+            }while (cursor.moveToNext());
+            //mempersiapkan adapter untuk recyclerView
+            AdapterProduk adapterProduk = new AdapterProduk(this, produk);
+            //mengatur adapter untuk RecyclerView
+            listProduk.setAdapter(adapterProduk);
+            listProduk.getAdapter().notifyDataSetChanged();
         }
-        //mempersiapkan adapter untuk recyclerView
-        AdapterProduk adapterProduk = new AdapterProduk(this,produk);
-        //mengatur adapter untuk RecyclerView
-        listProduk.setAdapter(adapterProduk);
-        listProduk.getAdapter().notifyDataSetChanged();
     }
 
     private void inisialisasi() {

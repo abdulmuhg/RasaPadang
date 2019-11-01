@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 public class AdapterProdukUser extends RecyclerView.Adapter<AdapterProdukUser.ViewHolder> {
     private ArrayList<ModelProduk> produk;
+    public ArrayList<ModelTransaksi> transaksi;
     private Context context;
 
     public AdapterProdukUser(Context context, ArrayList<ModelProduk> produks) {
@@ -41,6 +42,7 @@ public class AdapterProdukUser extends RecyclerView.Adapter<AdapterProdukUser.Vi
         holder.jmlhItem.setText("0");
 
 
+
         //fungsi saat mengklik item list
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,10 +62,13 @@ public class AdapterProdukUser extends RecyclerView.Adapter<AdapterProdukUser.Vi
                 items = items+1;
 
                 holder.jmlhItem.setText(items+"");
+
                 Intent intent = new Intent("custom-message");
+                intent.putExtra("kode_produk", produk.get(position).getKode_produk());
                 intent.putExtra("nama_produk",produk.get(position).getNama_produk());
-                //intent.putExtra("harga_produk",produk.get(position).getHarga_jual());
-                //intent.putExtra("jumlah_item", items);
+                intent.putExtra("harga_produk",produk.get(position).getHarga_jual());
+                intent.putExtra("harga_pokok_produk",produk.get(position).getHarga_pokok());
+                intent.putExtra("jumlah_item", items);
                 LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
             }
@@ -75,11 +80,20 @@ public class AdapterProdukUser extends RecyclerView.Adapter<AdapterProdukUser.Vi
                 int items = Integer.parseInt(item);
                 items = items-1;
 
+                Intent intent = new Intent("custom-message");
+                intent.putExtra("kode_produk", produk.get(position).getKode_produk());
+                intent.putExtra("nama_produk",produk.get(position).getNama_produk());
+                intent.putExtra("harga_produk",produk.get(position).getHarga_jual());
+                intent.putExtra("harga_pokok_produk",produk.get(position).getHarga_pokok());
                 if(items < 0){
                     holder.jmlhItem.setText(item+"");
+                    intent.putExtra("jumlah_item", items);
                 }else{
                     holder.jmlhItem.setText(items+"");
+                    intent.putExtra("jumlah_item", items);
                 }
+
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
             }
         });
     }

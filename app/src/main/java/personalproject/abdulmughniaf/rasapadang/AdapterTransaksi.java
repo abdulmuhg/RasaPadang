@@ -34,9 +34,9 @@ public class AdapterTransaksi extends RecyclerView.Adapter<AdapterTransaksi.View
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         //untuk menampilkan data produk pada content_list_produk_editor_editor.xml
-        holder.namaProduk.setText(produk.get(position).getNamaProduk());
-//        holder.stokProduk.setText(produk.get(position).getStok()+" Items");
-//        holder.hargaJual.setText("Rp "+produk.get(position).getHarga_jual());
+        holder.namaProduk.setText(produk.get(position).getNamaProduk() + "");
+        holder.jumlahItem.setText(produk.get(position).getJumlahItem() + "");
+        holder.hargaJual.setText("Rp "+produk.get(position).getHargaJual());
 
         //fungsi saat mengklik item list
 //        holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -62,13 +62,12 @@ public class AdapterTransaksi extends RecyclerView.Adapter<AdapterTransaksi.View
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        //mendeklarasikan komponen pada layout content_list_produk_editor_editor.xml
-        TextView namaProduk,stokProduk,hargaJual;
+        TextView namaProduk,jumlahItem,hargaJual;
         ViewHolder(View itemView){
             super(itemView);
             namaProduk = itemView.findViewById(R.id.tvTransNamaProduk);
-//            stokProduk = itemView.findViewById(R.id.txtStokProduk);
-//            hargaJual = itemView.findViewById(R.id.txtHargaJual);
+            jumlahItem = itemView.findViewById(R.id.tvTransJmlItem);
+            hargaJual = itemView.findViewById(R.id.tvTransHargaJual);
         }
     }
 }

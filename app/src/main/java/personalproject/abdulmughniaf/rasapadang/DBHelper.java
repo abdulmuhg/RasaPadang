@@ -49,6 +49,12 @@ public class DBHelper extends SQLiteOpenHelper {
             "kode_produk INTEGER," +
             "qty INTEGER)";
 
+    private String BUAT_TABEL_KERANJANG = "CREATE TABLE IF NOT EXISTS keranjang (" +
+            "kode_produk INTEGER PRIMARY KEY," +
+            "nama_produk TEXT," +
+            "harga_jual REAL," +
+            "jumlah_produk INTEGER)";
+
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -59,6 +65,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(BUAT_TABEL_TRANSAKSI);
         db.execSQL(BUAT_TABEL_DETAIL_TRANSAKSI);
         db.execSQL(SQL_TABLE_USERS);
+        db.execSQL(BUAT_TABEL_KERANJANG);
     }
 
     @Override
@@ -114,6 +121,33 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put("qty",qty);
         getWritableDatabase().insert("detail_transaksi",null,values);
         return true;
+    }
+
+    Boolean masukkanKeranjang(int kode_produk,
+                              String nama_produk,
+                              double harga_produk,
+                              int jumlah){
+        ContentValues values = new ContentValues();
+        values.put("kode_produk",kode_produk);
+        values.put("nama_produk", nama_produk);
+        values.put("harga_jual", harga_produk);
+        values.put("jumlah_produk",jumlah);
+        getWritableDatabase().insert("keranjang",null,values);
+        return true;
+    }
+    public boolean updateKeranjang(int kode, int newVal)
+    {
+        ContentValues args = new ContentValues();
+        args.put("jumlah_produk", newVal);
+        getWritableDatabase().update("keranjang", args, "kode_produk="+kode, null);
+        return true;
+    }
+
+    public void deleteRow(int kode)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + "keranjang" + " WHERE "+ "kode_produk" +"='"+kode+"'");
+        db.close();
     }
 
     public void addUser(User user) {

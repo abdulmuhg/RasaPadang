@@ -7,11 +7,59 @@
     android:layout_height="match_parent"
     tools:context=".TransaksiActivity"
     android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_margin="16dp"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:textSize="24sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="Proses Transaksi"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listTransaksi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:overScrollMode="never" />
+    <EditText
+        android:id="@+id/etTotalBayar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textSize="24sp"
+        android:inputType="number"
+        android:hint="Uang Pembeli"
+        />
+    <Button
+        android:id="@+id/btnBayar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:text=""
+        />
+    <TextView
+        android:id="@+id/tvKembalian"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textSize="24sp"
+        android:maxLines="2"
+        />
+    <Button
+        android:id="@+id/btnSelesai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Selesai"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        />
 
 </LinearLayout>
