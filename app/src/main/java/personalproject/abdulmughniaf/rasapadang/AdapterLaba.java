@@ -13,11 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class AdapterTransaksi extends RecyclerView.Adapter<AdapterTransaksi.ViewHolder> {
-    private ArrayList<ModelTransaksi> produk;
+public class AdapterLaba extends RecyclerView.Adapter<AdapterLaba.ViewHolder> {
+    private ArrayList<ModelLaba> produk;
     private Context context;
 
-    public AdapterTransaksi(Context context, ArrayList<ModelTransaksi> produks) {
+    public AdapterLaba(Context context, ArrayList<ModelLaba> produks) {
         this.produk = produks;
         this.context = context;
     }
@@ -27,17 +27,15 @@ public class AdapterTransaksi extends RecyclerView.Adapter<AdapterTransaksi.View
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //mengatur content_list_produk_editor.xmltor.xml sebagai template
         // item dari list produk yang akan ditampilkan
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.content_list_transaksi, null);
-        return new AdapterTransaksi.ViewHolder(v);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.content_list_laba, null);
+        return new AdapterLaba.ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         //untuk menampilkan data produk pada content_list_produk_editor_editor.xml
-        holder.namaProduk.setText(produk.get(position).getNamaProduk() + "");
-        holder.jumlahItem.setText(produk.get(position).getJumlahItem() + "");
-        double total = produk.get(position).getJumlahItem() * produk.get(position).getHargaJual();
-        holder.hargaJual.setText("Rp "+total);
+        holder.tvcodeTrans.setText(produk.get(position).getKode_trans() + "");
+        holder.tvLaba.setText(produk.get(position).getLaba() + "");
     }
 
     @Override
@@ -46,12 +44,11 @@ public class AdapterTransaksi extends RecyclerView.Adapter<AdapterTransaksi.View
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView namaProduk,jumlahItem,hargaJual;
+        TextView tvcodeTrans, tvLaba;
         ViewHolder(View itemView){
             super(itemView);
-            namaProduk = itemView.findViewById(R.id.tvTransNamaProduk);
-            jumlahItem = itemView.findViewById(R.id.tvTransJmlItem);
-            hargaJual = itemView.findViewById(R.id.tvTransHargaJual);
+            tvcodeTrans = itemView.findViewById(R.id.tvcodeTrans);
+            tvLaba = itemView.findViewById(R.id.tvLaba);
         }
     }
 }

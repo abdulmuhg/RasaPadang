@@ -26,6 +26,7 @@
                 android:textStyle="bold"
                 android:textSize="24sp"
                 android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"
                 />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -36,12 +37,13 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_menu_add" />
+        android:src="@drawable/ic_menu_add_48dp"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

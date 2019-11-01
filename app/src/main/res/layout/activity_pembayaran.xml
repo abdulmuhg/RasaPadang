@@ -6,23 +6,77 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_vertical"
+    android:layout_margin="8dp"
     tools:context=".PembayaranActivity">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:text="Detail Transaksi"
+        android:textColor="@color/colorPrimaryDark"
+        android:textAlignment="center"
+        />
+    <TextView
+        android:id="@+id/tvKodeTrans"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textSize="16sp"
+        />
     <TextView
         android:id="@+id/tvtotalBayarP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="32sp"
+        android:layout_margin="8dp"
+        android:textSize="16sp"
         />
-    <EditText
-        android:id="@+id/etUangPembeli"
+    <TextView
+        android:id="@+id/tvUangPembeli"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:hint="Uang Pembeli"
-        android:layout_marginVertical="16dp"
+        android:layout_margin="8dp"
+        android:textSize="16sp"
         />
-
-
+    <TextView
+        android:id="@+id/tvUangKembalian"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textSize="16sp"
+        />
+    <TextView
+        android:id="@+id/tvTotalUntung"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textSize="16sp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="2">
+    <Button
+        android:layout_weight="1"
+        android:background="@drawable/bg_btn"
+        android:id="@+id/btnSelesai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textColor="@color/colorSecondary"
+        android:text="Selesai"
+        />
+    <Button
+        android:layout_weight="1"
+        android:background="@drawable/bg_btn"
+        android:textColor="@color/colorSecondary"
+        android:id="@+id/btnLihatLaba"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="Lihat Total Laba"
+        />
+    </LinearLayout>
 </LinearLayout>

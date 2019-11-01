@@ -101,7 +101,6 @@ public class AddProdukActivity extends AppCompatActivity {
         btnBersihkan = findViewById(R.id.btnBersihkan);
         btnSimpan = findViewById(R.id.btnSimpan);
         btnLihatData = findViewById(R.id.btnLihatData);
-        btnTransaksi = findViewById(R.id.btnTransaksi);
 
         editKodeProduk = findViewById(R.id.editKodeProduk);
         editNamaProduk = findViewById(R.id.editNamaProduk);

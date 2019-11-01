@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class TransaksiActivity extends AppCompatActivity {
     private RecyclerView listTrans;
@@ -29,6 +31,8 @@ public class TransaksiActivity extends AppCompatActivity {
     private DBHelper db;
     public ArrayList<ModelTransaksi> transaksiModel, transaksiModelLama;
     public double totalHarga;
+    public double totalKeuntungan;
+    public String kode_transaksi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +46,8 @@ public class TransaksiActivity extends AppCompatActivity {
 
         btnBayar = findViewById(R.id.btnBayar);
         etTotalBayar = findViewById(R.id.etTotalBayar);
-        tvKembalian = findViewById(R.id.tvKembalian);
-        btnSelesai = findViewById(R.id.btnSelesai);
+
+
 
         listTrans.setLayoutManager(new LinearLayoutManager(this));
 
@@ -61,10 +65,17 @@ public class TransaksiActivity extends AppCompatActivity {
                 transaksiModel.add(model);
 
                 double harga = cursor.getDouble(cursor.getColumnIndex("harga_jual"));
+
                 int qty = cursor.getInt(cursor.getColumnIndex("jumlah_produk"));
+
                 totalHarga = totalHarga + (harga * qty);
                 btnBayar.setText("Bayar : Rp " + totalHarga);
-                //cursor.moveToNext();
+
+                //hitung keuntungan per transaksi
+                double modal = cursor.getDouble(cursor.getColumnIndex("harga_pokok"));
+                double hargaJual = cursor.getDouble(cursor.getColumnIndex("harga_jual"));
+                double keuntungan = (hargaJual - modal) * qty;
+                totalKeuntungan = totalKeuntungan + keuntungan;
             } while (cursor.moveToNext());
 
             AdapterTransaksi adapterTransaksi = new AdapterTransaksi(this, transaksiModel);
@@ -75,38 +86,65 @@ public class TransaksiActivity extends AppCompatActivity {
         btnBayar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (etTotalBayar.getText().toString().isEmpty()) {
-                    Toast.makeText(TransaksiActivity.this, "Masukkan Uang Pembeli", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    double uangPembeli = Double.valueOf(etTotalBayar.getText().toString());
-                    double kembalian = uangPembeli - totalHarga;
-
-                    if (kembalian < 0) {
-                        Snackbar snackbar = Snackbar.make(view, "Uang Tidak Cukup", Snackbar.LENGTH_SHORT);
-                        snackbar.show();
+                if(totalHarga != 0) {
+                    if (etTotalBayar.getText().toString().isEmpty()) {
+                        Toast.makeText(TransaksiActivity.this, "Masukkan Uang Pembeli", Toast.LENGTH_SHORT).show();
                     } else {
-                        Snackbar snackbar = Snackbar.make(view, "Uang kembalian : Rp. " + kembalian, Snackbar.LENGTH_SHORT);
-                        snackbar.show();
-                        tvKembalian.setText("Uang Kembalian : " + kembalian);
-                        //startActivity(intent);
+                        double uangPembeli = Double.valueOf(etTotalBayar.getText().toString());
+                        double kembalian = uangPembeli - totalHarga;
+
+                        if (kembalian < 0) {
+                            Snackbar snackbar = Snackbar.make(view, "Uang Tidak Cukup", Snackbar.LENGTH_SHORT);
+                            snackbar.show();
+                        } else {
+                            //generate kode transaksi
+                            kode_transaksi = TransaksiActivity.getAlphaNumericString(6);
+                            db.insertKeuntungan(kode_transaksi, totalKeuntungan);
+                            Intent intent = new Intent(TransaksiActivity.this, PembayaranActivity.class);
+                            intent.putExtra("harga_total", totalHarga);
+                            intent.putExtra("uang_pembeli", uangPembeli);
+                            intent.putExtra("uang_kembalian", kembalian);
+                            intent.putExtra("total_keuntungan", totalKeuntungan);
+                            intent.putExtra("kode_transaksi", kode_transaksi);
+                            startActivity(intent);
+                            clearTabelKeranjang();
+                        }
                     }
+                }else{
+                    Toast.makeText(TransaksiActivity.this, "Keranjang Masih Kosong !", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+    private void clearTabelKeranjang(){
+        SQLiteDatabase database = db.getWritableDatabase();
+        database.delete("keranjang", null, null);
+    }
+    static String getAlphaNumericString(int n)
+    {
 
-        btnSelesai.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(tvKembalian.getText().toString().isEmpty()){
-                    Toast.makeText(TransaksiActivity.this, "Mohon Selesaikan Pembayaran", Toast.LENGTH_SHORT).show();
-                }else {
-                    Intent intent = new Intent(TransaksiActivity.this, MainActivity.class);
-                    startActivity(intent);
-                }
-            }
-        });
+        // chose a Character random from this String
+        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                + "0123456789"
+                + "abcdefghijklmnopqrstuvxyz";
 
+        // create StringBuffer size of AlphaNumericString
+        StringBuilder sb = new StringBuilder(n);
+
+        for (int i = 0; i < n; i++) {
+
+            // generate a random number between
+            // 0 to AlphaNumericString variable length
+            int index
+                    = (int)(AlphaNumericString.length()
+                    * Math.random());
+
+            // add Character one by one in end of sb
+            sb.append(AlphaNumericString
+                    .charAt(index));
+        }
+
+        return sb.toString();
     }
 
 }

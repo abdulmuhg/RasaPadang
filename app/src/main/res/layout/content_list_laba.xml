@@ -5,13 +5,11 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:background="@drawable/bg_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="top|center_vertical"
         android:orientation="horizontal"
-        android:layout_margin="8dp"
-        android:outlineSpotShadowColor="@color/colorPrimaryDark"
+        android:weightSum="1"
         android:padding="12dp">
 
         <LinearLayout
@@ -21,26 +19,19 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvTransNamaProduk"
+                android:id="@+id/tvcodeTrans"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
                 android:text="Nama Produk"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@android:color/black"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/tvTransJmlItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="0 Items"
-                android:textColor="@color/colorPrimary"
-                android:textSize="12sp" />
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvTransHargaJual"
+            android:layout_weight="1"
+            android:id="@+id/tvLaba"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Rp 0"

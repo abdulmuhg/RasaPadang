@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, TransaksiActivity.class);
-                intent.putExtra("transaksiModels", transaksi);
                 startActivity(intent);
             }
         });
@@ -74,30 +73,23 @@ public class MainActivity extends AppCompatActivity {
             if(jumlah_item < 1){
                 db.deleteRow(kode_produk);
             }
-//            ModelTransaksi modelTrans = new ModelTransaksi();
-//            modelTrans.setNamaProduk(nama_produk);
-//            modelTrans.setJumlahItem(jumlah_item);
-//            transaksi.add(modelTrans);
-
             String queryCek = "SELECT * FROM keranjang WHERE kode_produk = "+ kode_produk;
             if(db.customQuery(queryCek).getCount() > 0){
                 //jika sudah ada
                 db.updateKeranjang(kode_produk, jumlah_item);
-                Toast.makeText(MainActivity.this,"" + jumlah_item,Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"" + nama_produk + " ditambahkan",Toast.LENGTH_SHORT).show();
             }else{
                 //jika belum ada
                 //lakukan proses insert jika data sudah lengkap
-                if(db.masukkanKeranjang(
+                db.masukkanKeranjang(
                         //konversi nilai dari text ke tipe data sesuai dengan
                         //yang ada di parameter Method insertProduk pada class DBHelper
                         Integer.valueOf(kode_produk),
                         String.valueOf(nama_produk),
                         Double.valueOf(harga_jual),
+                        Double.valueOf(harga_pokok),
                         Integer.valueOf(jumlah_item)
-                ) && jumlah_item > 0){
-                    //beritahukan jika input berhasil dengan TOASTER
-                    Toast.makeText(MainActivity.this,"Data berhasil ditambahkan.",Toast.LENGTH_SHORT).show();
-                }
+                );
             }
         }
     };
@@ -161,6 +153,9 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             startActivity(new Intent(MainActivity.this, ListProdukActivity.class));
+        }
+        else if(id == R.id.action_laba){
+            startActivity(new Intent(MainActivity.this, LabaActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

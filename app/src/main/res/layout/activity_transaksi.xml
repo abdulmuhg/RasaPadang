@@ -34,32 +34,16 @@
         android:hint="Uang Pembeli"
         />
     <Button
+        android:background="@drawable/bg_btn"
         android:id="@+id/btnBayar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:textSize="32sp"
+        android:padding="8dp"
+        android:textSize="24sp"
+        android:textColor="@color/colorSecondary"
         android:textStyle="bold"
         android:textAllCaps="false"
         android:text=""
         />
-    <TextView
-        android:id="@+id/tvKembalian"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:textSize="24sp"
-        android:maxLines="2"
-        />
-    <Button
-        android:id="@+id/btnSelesai"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Selesai"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textAllCaps="false"
-        />
-
 </LinearLayout>

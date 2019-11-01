@@ -41,17 +41,10 @@ public class AdapterProdukUser extends RecyclerView.Adapter<AdapterProdukUser.Vi
         holder.hargaJual.setText("Rp "+produk.get(position).getHarga_jual());
         holder.jmlhItem.setText("0");
 
-
-
-        //fungsi saat mengklik item list
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //membuka halaman/Activity Activity_DetailProduk
-                //dan mengirim sebuah nilai dengan kata kunci "kode_produk,dkk"
-                //dimana isinya merupakai kode_produk
-                Intent intent = new Intent(context,LoginActivity.class);
-                context.startActivity(intent);
+
             }
         });
         holder.addItem.setOnClickListener(new View.OnClickListener() {

@@ -53,7 +53,12 @@ public class DBHelper extends SQLiteOpenHelper {
             "kode_produk INTEGER PRIMARY KEY," +
             "nama_produk TEXT," +
             "harga_jual REAL," +
+            "harga_pokok REAL," +
             "jumlah_produk INTEGER)";
+
+    private String BUAT_TABEL_DETAIL_KEUNTUNGAN = "CREATE TABLE IF NOT EXISTS total_keuntungan (" +
+            "kode_transaksi TEXT PRIMARY KEY," +
+            "keuntungan REAL)";
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -66,6 +71,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(BUAT_TABEL_DETAIL_TRANSAKSI);
         db.execSQL(SQL_TABLE_USERS);
         db.execSQL(BUAT_TABEL_KERANJANG);
+        db.execSQL(BUAT_TABEL_DETAIL_KEUNTUNGAN);
     }
 
     @Override
@@ -123,14 +129,26 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
+    Boolean insertKeuntungan(String kode_transaksi,
+                                  double laba){
+        ContentValues values = new ContentValues();
+        values.put("kode_transaksi",kode_transaksi);
+        values.put("keuntungan",laba);
+        getWritableDatabase().insert("total_keuntungan",null,values);
+        return true;
+    }
+
     Boolean masukkanKeranjang(int kode_produk,
                               String nama_produk,
                               double harga_produk,
-                              int jumlah){
+                              double harga_pokok,
+                              int jumlah
+                              ){
         ContentValues values = new ContentValues();
         values.put("kode_produk",kode_produk);
         values.put("nama_produk", nama_produk);
         values.put("harga_jual", harga_produk);
+        values.put("harga_pokok", harga_pokok);
         values.put("jumlah_produk",jumlah);
         getWritableDatabase().insert("keranjang",null,values);
         return true;
@@ -149,6 +167,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM " + "keranjang" + " WHERE "+ "kode_produk" +"='"+kode+"'");
         db.close();
     }
+
 
     public void addUser(User user) {
 
